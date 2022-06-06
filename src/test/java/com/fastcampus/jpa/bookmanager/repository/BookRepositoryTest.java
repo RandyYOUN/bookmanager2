@@ -57,7 +57,7 @@ public class BookRepositoryTest {
 
     private Book givenBook(Publisher publisher){
         Book book = new Book();
-        book.setName("JPA초격차패키지");
+        book.setName("JPA초격차패키지!!!");
         book.setPublisher(publisher);
 
         return bookRepository.save(book);
