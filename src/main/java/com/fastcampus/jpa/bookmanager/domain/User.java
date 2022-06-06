@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +20,9 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @EntityListeners(value = {UserEntityListener.class})
-@Table(name="user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class User extends BaseEntity   {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String name;
@@ -30,30 +31,14 @@ public class User extends BaseEntity   {
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
-//    @Transient
-//    private String testData;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id" , insertable = false, updatable = false)
+    @ToString.Exclude
+    private List<UserHistory> userHistories = new ArrayList<>();
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<Address> address;
-
-//    @PrePersist
-//    public void prePersist(){
-//        this.createAt = LocalDateTime.now();
-//        this.updateAt = LocalDateTime.now();
-//    }
-//
-//
-//    @PreUpdate
-//    public void preUpdate(){
-//        this.updateAt = LocalDateTime.now();
-//    }
-
-
-//    @PreRemove
-//    @PostPersist
-//    @PostUpdate
-//    @PostRemove
-//    @PostLoad
-
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 }

@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,7 +22,7 @@ import java.time.LocalDateTime;
 //@EntityListeners(value = AuditingEntityListener.class)
 public class Book extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -28,6 +30,18 @@ public class Book extends BaseEntity {
 
     private String category;
     private Long authorId;
-    private Long publisherId;
+    //private Long publisherId;
 
+    @OneToOne(mappedBy = "book")
+    @ToString.Exclude
+    private BookReviewInfo bookReviewInfo;
+
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
+
+    @ManyToOne
+    @ToString.Exclude
+    private Publisher publisher;
 }
