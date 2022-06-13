@@ -41,10 +41,6 @@ public class BookRepositoryTest {
         givenBookAndReview();
 
         User user = userRepository.findByEmail("yhd0626@gmail.com");
-
-        System.out.println("Review : " + user.getReviews());
-        System.out.println("Book : " + user.getReviews().get(0).getBook());
-        System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
     }
 
     private void givenBookAndReview(){
