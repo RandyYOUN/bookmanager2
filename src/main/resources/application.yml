@@ -12,8 +12,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:mysql://localhost:3306/book_manager
-    username: root
+    url: jdbc:mysql://182.162.143.216:3306/book_manager
+    username: sschina
     password: Andy4240!@
     initialization-mode: always
 
