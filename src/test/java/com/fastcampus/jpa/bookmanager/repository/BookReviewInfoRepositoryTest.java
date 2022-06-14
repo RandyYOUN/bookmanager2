@@ -18,35 +18,35 @@ class BookReviewInfoRepositoryTest {
 
     @Test
     void crudTest(){
-//        BookReviewInfo bookReviewInfo = new BookReviewInfo();
-//        //bookReviewInfo.setBookId(1L);
-//        bookReviewInfo.setAverageReviewScore(4.5f);
-//        bookReviewInfo.setReviewCount(2);
-//
-//        bookReviewInfoRepository.save(bookReviewInfo);
-//
-//        System.out.println(">>> " + bookReviewInfoRepository.findAll());
+        BookReviewInfo bookReviewInfo = new BookReviewInfo();
+        //bookReviewInfo.setBookId(1L);
+        bookReviewInfo.setBook(givenBook());
+        bookReviewInfo.setAverageReviewScore(4.5f);
+        bookReviewInfo.setReviewCount(2);
+
+        bookReviewInfoRepository.save(bookReviewInfo);
+
+        System.out.println(">>> " + bookReviewInfoRepository.findAll());
     }
 
     @Test
     void crudTest2(){
+        givenBookReviewInfo();
 
-//        givenBookReviewInfo();
-//
-//        Book result =
-//                bookReviewInfoRepository
-//                        .findById(1L)
-//                        .orElseThrow(RuntimeException::new)
-//                        .getBook();
-//
-//        System.out.println(">>> " + result);
-//
-//        BookReviewInfo result2 = bookRepository
-//                .findById(1L)
-//                .orElseThrow(RuntimeException::new)
-//                .getBookReviewInfo();
-//
-//        System.out.println(">>> " + result2);
+        Book result =
+                bookReviewInfoRepository
+                        .findById(1L)
+                        .orElseThrow(RuntimeException::new)
+                        .getBook();
+
+        System.out.println(">>> " + result);
+
+        BookReviewInfo result2 = bookRepository
+                .findById(7L)
+                .orElseThrow(RuntimeException::new)
+                .getBookReviewInfo();
+
+        System.out.println(">>> " + result2);
     }
 
     private Book givenBook(){
