@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class Publisher extends BaseEntity{
     private Long id;
 
     private String name;
-    @OneToMany
+
+
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "publisher_id")
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
