@@ -1,8 +1,10 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
+import com.fastcampus.jpa.bookmanager.domain.Address;
 import com.fastcampus.jpa.bookmanager.domain.Gender;
 import com.fastcampus.jpa.bookmanager.domain.User;
 import com.fastcampus.jpa.bookmanager.domain.UserHistory;
+import com.fastcampus.jpa.bookmanager.service.EntiryManagerTest;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +29,9 @@ class UserRepositoryTest {
 
     @Autowired
     private UserHistoryRepository userHistoryRepository;
+
+    @Autowired
+    private EntityManager entiryManager;
 
     //@Transactional
     @Test
@@ -254,6 +260,39 @@ class UserRepositoryTest {
         result.forEach(System.out::println);
 
         System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
+    }
+
+    @Test
+    void EmbedTest(){
+        userRepository.findAll().forEach(System.out::println);
+
+        User user = new User();
+        user.setName("Steve");
+        user.setHomeAddress(new Address("서울시","강남구","강남대로 364 미왕빌딩","06242"));
+        user.setCompanyAddress(new Address("서울시","성동구","성수이로 113 제강빌딩","04794"));
+
+        userRepository.save(user);
+
+        User user1 = new User();
+        user1.setName("joshua");
+        user1.setHomeAddress(null);
+        user1.setCompanyAddress(null);
+
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setName("jordan");
+        user2.setHomeAddress(new Address());
+        user2.setCompanyAddress(new Address());
+        userRepository.save(user2);
+
+        entiryManager.clear();
+
+        userRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
+
+        userRepository.findAllRowRecord().forEach(a-> System.out.println(a.values()));
+
     }
 }
 

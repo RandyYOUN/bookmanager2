@@ -1,6 +1,7 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
 import com.fastcampus.jpa.bookmanager.domain.listener.Auditable;
+import com.fastcampus.jpa.bookmanager.repository.dto.BookStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -57,6 +58,10 @@ public class Book extends BaseEntity {
     private List<BookAndAuthor> bookAndAuthors=new ArrayList<>();
 
     private boolean deleted;
+
+    //@Convert(converter = BookStatus.class)
+    private BookStatus status;  // 판매상태
+
 
     public void addBookAndAuthor(BookAndAuthor... bookAndAuthors){
         Collections.addAll(this.bookAndAuthors,bookAndAuthors);

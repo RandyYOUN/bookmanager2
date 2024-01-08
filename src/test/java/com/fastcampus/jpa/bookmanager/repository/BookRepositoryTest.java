@@ -4,6 +4,7 @@ import com.fastcampus.jpa.bookmanager.domain.Book;
 import com.fastcampus.jpa.bookmanager.domain.Publisher;
 import com.fastcampus.jpa.bookmanager.domain.Review;
 import com.fastcampus.jpa.bookmanager.domain.User;
+import com.fastcampus.jpa.bookmanager.repository.dto.BookStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -171,7 +172,19 @@ public class BookRepositoryTest {
 
 
 
+@Test
+void ConverterTest(){
+        bookRepository.findAll().forEach(System.out::println);
 
+        Book book = new Book();
+        book.setName("또다른 it전문서적");
+        book.setStatus(new BookStatus(200));
+        bookRepository.save(book);
+
+    System.out.println(bookRepository.findRowRecord().values());
+
+    bookRepository.findAll().forEach(System.out::println);
+}
 
 
 
