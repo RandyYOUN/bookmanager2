@@ -25,3 +25,17 @@ insert into book(`id`, `name`, `publisher_id`,`deleted`, `status`) values (1,'JP
 insert into book(`id`, `name`,`publisher_id` ,`deleted`, `status`) values (2,'Spring Security 초격차 패키지',1, false,200);
 
 insert into book(`id`, `name`,`publisher_id` ,`deleted`, `status`) values (3,'Spring Security 초격차 패키지2',1, true,100);
+
+insert into review(`id`,`title`,`content`,`score`,`user_id`,`book_id`)
+values (1,'내인생을바꾼책','너무너무 좋았어요',5.0, 1 ,1);
+
+insert into review(`id`,`title`,`content`,`score`,`user_id`,`book_id`)
+values (2,'너무 빠른 너','조금별로',3.0, 2, 2);
+
+insert into comment(`id`,`comment`,`review_id`) values (1,'당연히 좋죠',1);
+
+insert into comment(`id`,`comment`,`review_id`) values (2,'당연히 좋죠222',2);
+
+insert into comment(`id`,`comment`,`review_id`) values (3,'별루 아닌갘ㅋ',2);
+
+
