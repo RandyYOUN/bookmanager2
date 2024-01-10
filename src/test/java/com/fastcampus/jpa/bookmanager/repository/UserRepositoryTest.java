@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
@@ -286,12 +287,17 @@ class UserRepositoryTest {
         user2.setCompanyAddress(new Address());
         userRepository.save(user2);
 
-        entiryManager.clear();
+        //entiryManager.clear();
 
         userRepository.findAll().forEach(System.out::println);
         userHistoryRepository.findAll().forEach(System.out::println);
 
         userRepository.findAllRowRecord().forEach(a-> System.out.println(a.values()));
+
+        assertAll(
+                ()-> assertThat(userRepository.findById(7L).get().getHomeAddress()).isNull(),
+                ()->assertThat(userRepository.findById(8L).get().getHomeAddress()).isInstanceOf(Address.class)
+        );
 
     }
 }
